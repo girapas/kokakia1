@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VideoMenu</title>
+<style>
+    body {
+      font-family: 'Calibri', sans-serif;
+      padding-top: 0;
+	  margin-top: 0;
+	  margin-left: 30px;
+      background-color: #f4f4f4;
+	}
+	 h1 {
+		margin-top: 5px;
+ 	}
+	.main-banner img {
+	  display: block;
+	  margin-top: 15px;
+	  padding: 10px;
+	  margin-left: 110px;
+	 / max-width: 90%;
+	  
+	}
+    .intro-button {
+      position: absolute;
+	  size: 160;
+      top: 60px;
+      right: 110px;
+      background-color: #1C78FF;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+    }  
+	.top-bar {
+	  margin-top: 5px;
+	  display: flex;
+	  justify-content: flex-end;
+	  align-items: center;
+	  gap: 20px;
+	  margin: 0px 50px 5px 0;  /* top, right, bottom, left */
+	}
+	.search-bar {
+	  position: absolute;
+	  margin-left: 1630px;
+	  margin-right: 50px;
+	  margin-top: -40px;
+	}
+    .search-bar input {
+      padding: 10px;
+	  font-family: 'Calibri', sans-serif;
+	  font-size: 14px;
+      max-width: 115px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+     }
+    .group-title {
+	  font-family: 'VAGRounded BT', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+	  letter-spacing: 2px;
+      margin-top: 40px;
+      color: #8F8F8F;
+	}
+	.descr-hint {
+	   padding: 5px;
+	   font-size: 14px;
+       font-family: inherit;
+       font-weight: normal;
+       color: #0000FF;
+	   display: flex;
+	   align-items: center;
+	   margin-top: 5px;
+	}
+	.descr-hint img {
+		height: 26px;
+		vertical-align: middle;
+	}
+	.descr-hint:hover {
+		color: #000;
+	}
+	.right-box {
+	  position: absolute;
+	  margin-left: 512px;
+	  top: 170px; 
+	  width: 410px;
+	  padding: 0px;               
+	  font-size: 14px;
+	  font-family: inherit;
+	  font-style: italic;
+	/  font-weight: bold;
+	  letter-spacing: .5px;
+	  color: #0000C9;
+	  text-align: center;
+	  background-color: #FFF9F6;
+	  border: 1px solid #ccc;
+	  border-radius: 10px;
+		
+	}
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 10px;
+	} 
+	.video-item:nth-child(even) {
+		background-color: #FEF9F7;
+	}
+    .video-item {
+		 background: #FFFFFF;
+		 padding: 15px;
+		 border-radius: 12px;
+		 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		 position: relative;
+	}	 
+	.video-item.new::after {
+	  content: "";
+	  position: absolute;
+	  top: 12px;
+	  right: 150px;
+	  width: 50px; 
+	  height: 30px;
+	  background: url('NEO2_anigif_custombg.gif') no-repeat center;
+	  background-size: contain;
+	  pointer-events: none;	 
+    }
+	.video-button:hover {
+	  background-color: #041A7C;
+	  transition: 0.3s ease;
+	}
+    .video-title {
+      font-family: 'VAGRounded BT', sans-serif;
+	  font-weight: bold;
+      font-size: 14px;
+	  letter-spacing: 2px;
+      margin-bottom: 10px;
+	  color: #1E34D3
+    }
+    .video-button {
+      background-color: #3C88CB;
+      color: white;
+	  padding: 6px 8px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      margin-top: 5px;
+	}
+	.video-button:hover {
+	  background-color: #1A48B2;
+    }
+    .info-icon {
+      cursor: pointer;
+      float: right;
+      font-size: 16px;
+      color: #1557FF;
+     }
+    .description {
+	 display: none;
+	 margin-top: 10px;
+	 font-size: 14px;
+	 color: #333;
+    }
+	.back-to-top {
+	  position: fixed;
+	  bottom: 30px;
+	  right: 30px;
+	  background: #000040;
+	  color: white;
+	  padding: 10px 20px;
+	  border-radius: 8px;
+	  font-size: 16px;
+	  text-decoration: none;
+	  display: none;
+	  z-index: 999;
+	  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+	  font-family: 'Calibri', sans-serif;
+	  font-size: 16px;
+	}
+	  .timestamp {
+      font-style: italic;
+      color: #C37EF2;
+    }
+	@font-face {
+	  font-family: 'VAGRounded BT';
+	  src: url('TT0756M_.woff') format('woff');
+	  font-weight: normal;
+	  font-style: normal;
+	}
+</style>
+</head>
+<body>
+<a class="intro-button" href="https://drive.google.com/file/d/1cZiCk3YPHI0Wp8nmXt8dftBioDH1YeJc/view?usp=sharing" target="_blank">Εισαγωγικό Βίντεο</a>
+<div class="main-banner">
+<img alt="KOKAKIA_VIDEO" src="SKHNES5-090.png"/>
+</div>
+
+<div class="top-bar">
+<a class="intro-button" href="https://drive.google.com/file/d/1cZiCk3YPHI0Wp8nmXt8dftBioDH1YeJc/view?usp=sharing" target="_blank">Εισαγωγικό Βίντεο</a>
+<div class="search-bar">
+<input id="searchInput" onkeyup="searchVideos()" placeholder="Αναζήτηση... έτος" type="text"/>
+</div>
+</div>
+<div class="descr-hint">
+  <img src="descr_icon-1.png"info icon">
+  σύντομη περιγραφή
+</div>
+
+<div class="right-box">
+  <p>Για παρακολούθηση κάθε βίντεο με καλύτερη ποιότητα εικόνας, <br/>
+επιλέξετε άλλον player, εκτός από αυτόν του Google Drive</p>
+</div>
+
+</div>
+<div class="group-title">1992 - 1997</div>
+<div class="video-grid">
+<div class="video-item">
+<div class="video-title">k1992
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1YGgyHcoWcafnL3rC4D7nxne1AJfTHMz4/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Δημήτρης 2 μηνών: <br/> <span class="timestamp">00:13</span> στο relax <br/> <span class="timestamp">02:19</span> με Μαρία αγκαλιά, τάισμα <br/> <span class="timestamp">04:21</span> με Μαρία στη βεράντα <br/> <span class="timestamp">07:11</span> με Μαρία στο κρεβάτι <br/> <span class="timestamp">10:18</span> με Γιώργο <br/> <span class="timestamp">13:50</span> με Βιολέτα στη βεράντα</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1993
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1PNvst6Xg5IRIBKs4W-nJu7hLCvbTk-Er/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:15</span> Άννα 2,5 μηνών <br/> <span class="timestamp">01:09</span> Άννα 2,5 μηνών, με παππού και γιαγιά <br/>  Δημήτρης 15 μηνών: <br/> <span class="timestamp">06:16</span> με παππού, γιαγιά <br/> <span class="timestamp">07:44</span> μόνος του <br/> <span class="timestamp">09:58</span> με Μαρία, Γιώργο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1994A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/10QMy0LPiJTb0cAPzAAMIxN8RELCd0q9q/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:19</span> Δημήτρης, 'Αννα, παιχνίδι στα νερά <br/> <span class="timestamp">02:14</span> Άννα κλάμα Ι και Μαρία <br/> <span class="timestamp">03:07</span> Άννα κλάμα ΙΙ Δημήτρης, Μαρία <br/> <span class="timestamp">05:05</span> Δημήτρης, ύπνος <br/> <span class="timestamp">05:28</span> Δημήτρης, 'Αννα, Μαρία στο σπίτι <br/> <span class="timestamp">06:44</span> Άννα, Γιώργος <br/> <span class="timestamp">07:35</span> Δημήτρης, Άννα, χριστουγεννιάτικα <br/>      τραγούδια <br/> <span class="timestamp">10:24</span> Χριστούγεννα 1994. Αίγιο, σπίτι γιαγιάς Αθηνάς</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1994B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1s-7BHTvnoYU9sDSrZuK83nmcYgp_bLo_/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Σπίτι γιαγιάς Αθηνάς στο Αίγιο (11/12/1994) <br/> <span class="timestamp">18:58</span> Χριστουγεννιάτικη γιορτή του παιδικού σταθμού Tivoli</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1995A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1PiupZzxdp28hOp_UJ1xH22egYeJvp0PH/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Πρωτοχρονιά 1995, Δώρα Άη Βασίλη...  <br/> <span class="timestamp">01:44</span> Άννα σόλο! <br/> <span class="timestamp">02:23</span> Άννα, Δημήτρης φαγητό <br/> <span class="timestamp">04:09</span> Άννα, Δημήτρης μπροστά στην κάμερα <br/> <span class="timestamp">05:15</span> Δημήτρης παιχνίδι στο σπίτι <br/> <span class="timestamp">07:18</span> Άννα, διάφορες κουβέντες <br/> <span class="timestamp">08:03</span> Δημήτρης, Άννα στο σπίτι με Γιώργο Μαγιώνο και Θάνια <br/> <span class="timestamp">08:47</span> Δημήτρης, Άννα, πρόβες για την 25η Μαρτίου <br/> <span class="timestamp">11:28</span> Άννα με μπιμπερό και Δημήτρης <br/> <span class="timestamp">13:05</span> Πάσχα 1995 Σπίτι παππού, γιαγιάς στον Ψαθόπυργο <br/> <span class="timestamp">22:19</span> Πάσχα 1995 Σπίτι Μαρίας Πατρικίου με γονείς της</div>
+</div>
+<div class="video-item new">
+<div class="video-title">k1995B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1fZrxRK1YREFBRJvSV4agZChGl3Da1kPj/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> διάφορα στο σπίτι <br/> <span class="timestamp">01:03</span> Άννα στη βεράντα της κουζίνας <br/> Δημήτρης, Άννα: <br/> <span class="timestamp">01:56</span>  στην πίσω βεράντα <br/> <span class="timestamp">03:57</span>  με Ελεονώρα στο σπίτι <br/> <span class="timestamp">06:45</span> κατάβρεγμα... <br/> <span class="timestamp">07:38</span>  βόλτα με το αυτοκίνητο <br/> <span class="timestamp">09:08</span>  με Ελεονώρα στην παραλία <br/> <span class="timestamp">10:40</span>  με Μαρία, Γιώργο στη θάλασσα <br/> <span class="timestamp">13:51</span>  με Μαρία, Άντα, Βιολέτα στην παραλία <br/> <span class="timestamp">15:49</span>  παιχνίδι στο μπάνιο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1995C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1vIqXR_bNV0gAn9rVbo1IQDtZur9_isuy/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Σπίτι με Άντα, Μαρία Πατρικίου και τον ...Φανούρη <br/> <span class="timestamp">16:50</span> Καλοκαιρινό βραδάκι, με τη γιαγιά στο σπίτι <br/> <span class="timestamp">21:30</span> Σπίτι γιαγιάς Αθηνάς, Άντας, Αίγιο (διάφορα)</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1996A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/11tp4NPvEqPNWp_NiCGPvOhDzJgP_7mfg/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Καινούργιο σπίτι, Καστελλόκαμπος, κτίσιμο - εξωτερικοί χώροι (1994 - τέλος 1995) <br/> <span class="timestamp">01:32</span> Πρώτες μέρες - Χριστουγενιάτικα τραγούδια και άλλα... <br/> <span class="timestamp">08:03</span> Πρωτοχρονιά. Δώρα Άη Βασίλη <br/> <span class="timestamp">11:09</span> Παιχνίδια διάφορα <br/> <span class="timestamp">14:56</span> Πολύ γέλιο τρώγοντας στην κουζίνα <br/> <span class="timestamp">16:42</span> Παιχνίδι και τραγούδια στο σαλόνι <br/> <span class="timestamp">19:17</span> Άννα, βλέματα... <br/> <span class="timestamp">19:38</span> Τραγούδια και πόζες στο ...κρεβάτι</div>
+</div>
+<div class="video-item new">
+<div class="video-title">k1996B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1mhsEVGUV2_UHZ7FVam0tYAuv52awy-yD/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Διάφορα στο σπίτι (τραγούδια, κουκλοθέατρο, αστεία) <br/> <span class="timestamp">04:09</span> Δημήτρης, Άννα με τη Ραλού Ι <br/> <span class="timestamp">09:19</span> Γενέθλια Δημήτρη, Άννας στο σπίτι <br/> <span class="timestamp">11:22</span> Γιορτή στον παιδικό σταθμό ΠΙΝΟΚΙΟ <br/> <span class="timestamp">17:27</span> Στη βεράντα με παππού, Βιολέτα</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1997
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1QNmd8eC81C-Tz8kMB4OlU5w-N6dOhYoZ/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Γενέθλια Δημήτρη στο σπίτι με παππού, γιαγιά, Βιολέττα - Δευτέρα του Πάσχα <br/> <span class="timestamp">09:39</span> Εκδρομή με παππού, γιαγιά <br/> <span class="timestamp">10:51</span> Λίμνη Τσιβλού με Θόδωρο, Νατάσσα, Ελεονώρα <br/> <span class="timestamp">12:20</span> Παιχνίδια στο σπίτι <br/> <span class="timestamp">19:56</span>  Χριστούγεννα 1997. Σπίτι παππού, γιαγιάς στη Ν. Σμύρνη</div>
+</div>
+</div>
+<div class="group-title">1998 - 2002A</div>
+<div class="video-grid">
+<div class="video-item">
+<div class="video-title">k1998
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1HLC55Z3EfdMJuWkrxNPoFxR4E7NG5EWC/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Καρναβάλι μικρών  <br/> <span class="timestamp">04:26</span> Απόκριες στην Πλατεία Γεωργίου <br/> <span class="timestamp">05:03</span> Γενέθλια Δημήτρη, Άννας στον παιδικό σταθμό ΝΑΥΤΙΛΟ <br/> <span class="timestamp">06:36</span> Γενέθλια Ιάσονα Χριστοδούλου - παιδικός σταθμός ΝΑΥΤΙΛΟΣ 11/1998 <br/> <span class="timestamp">10:45</span> Παιδικός σταθμός Ναυτίλος, καλοκαιρινή γιορτή <br/> <span class="timestamp">16:22</span> GoCart Βραχνέικα</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1999A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1_3Z7e7_MdvA-XRtwtGck0fUq4VX6WojK/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Αγία Μαρίνα Σελά με Νίκο Λουκάρη, Παναγιώτη, Μαριάννα <br/> <span class="timestamp">02:25</span> Καλάβρυτα με Μίνα Παπαμήτρου, άντρα και παιδιά της <br/> <span class="timestamp">04:28</span> Μάνη, με Μάρω, Παναγιώτη, Αθηνά και Λάμπρο <br/> <span class="timestamp">09:37</span> Με τον Δημήτρη στον Εθνικό Κήπο <br/> <span class="timestamp">11:41</span> Γιορτή στον παδικό σταθμό ΝΑΥΤΙΛΟ</div>
+</div>
+<div class="video-item">
+<div class="video-title">k1999B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/157BLAT1wc5VvR-K029lwqccJ42eG_MEP/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:07</span> Γενέθλια στον παιδικό σταθμό ΝΑΥΤΙΛΟ <br/>   Κέρκυρα, με Τάκη, Νατάσσα και Γιάννη: <br/> <span class="timestamp">04:17</span> στο πλοίο <br/> <span class="timestamp">05:25</span> Αχίλλειο <br/> <span class="timestamp">06:32</span> Στο σπίτι που μέναμε <br/> <span class="timestamp">07:02</span> Μπάνιο και παιχνίδια στη θάλασσα <br/> <span class="timestamp">11:15</span> Άννα κοιτάζοντας τη θάλασσα <br/> <span class="timestamp">11:53</span> Βόλτα στην πόλη με άμαξα  <br/> <span class="timestamp">15:27</span> Χριστουγεννιάτικη γιορτή στον παιδικό σταθμό ΝΑΥΤΙΛΟ</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2000A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1Ej5flNyxE5q5nGKBjB14jkEkio_sRaP5/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:07</span> Λευκάδα 6/2000 με Τάκη Σταυρόπουλο, Νατάσσα, Γιάννη <br/> <span class="timestamp">02:39</span> Στην πισίνα του ξενοδοχείου <br/> <span class="timestamp">05:49</span> Στην παραλία Βασιλική <br/> <span class="timestamp">06:22</span> Παιχνίδια στη θάλασσα <br/> <span class="timestamp">09:41</span> Κέρκυρα, οι τέσσερεις, Αύγουστος 2000 <br/> <span class="timestamp">12:45</span> στην Aqualand</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2000B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1CZcvIZSnAWBUuI1WxaeU5a9pCh0-nAiq/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Άννα, Δημήτρης, Μάλφα <br/> <span class="timestamp">00:45</span> Πρωτομαγιά 2000 - Στην Καλόγρια, με παρέα <br/> <span class="timestamp">01:30</span> Στα Γιάννενα, οι τέσσερεις  <br/> <span class="timestamp">03:53</span> Γενέθλια Κατερίνας Δανιά - Παιδότοπος στην Αγιά <br/> <span class="timestamp">06:12</span> Στο σπίτι διάφορα (στόλισμα χριστουγενιάτικου δεντρου, παχνίδια και άλλα) <br/> <span class="timestamp">09:52</span> Χριστούγεννα 2000 - Νέα Σμύρνη. Βόλτα με παππού στην πλατεία <br/> <span class="timestamp">11:47</span> Επιδείξεις στο Κολυμβητήριο της Πάτρας - 16.12.2000</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2001A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1faGYJLfW5no2FqHi9dViujpsksLJ09KC/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Πρωτοχρονιά στο σπίτι <br/> <span class="timestamp">01:40</span> Δημήτρης, Άννα, Γιώργος παιχνίδι <br/> <span class="timestamp">05:51</span> Καρναβάλι μικρών - Δημοτικό Σχολείο Ρίου <br/> <span class="timestamp">09:46</span> Άννα στην Αράχωβα <br/> <span class="timestamp">10:50</span> Ξάνθη, με την Αριάνα, φίλη της μαμάς και τα παιδιά της</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2001B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1zNoqX--5j7_qodXu1uHWWwnwsDwB1j2w/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">06:00</span> στο πλοίο για τη Μύκονο, γάμος Βιολέτας <br/> <span class="timestamp">03:47</span> Στο σπίτι που μέναμε <br/> <span class="timestamp">04:41</span> Παραλία <br/> <span class="timestamp">07:17</span> Δημήτρης, Άννα βόλτα στην πόλη <br/> <span class="timestamp">09:00</span> Με τον Πέτρο τον πελεκάνο <br/> <span class="timestamp">12:36</span> στη θάλασσα, με τον Γιάννη και παραλιακά</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2001C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1MJ6r-qALN24OpndMtCmx3kwWP7QoUbc-/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> στο πλοίο για Θεσσαλονίκη <br/> <span class="timestamp">01:48</span> Χαλκιδική, στο ξενοδοχείο <br/> <span class="timestamp">03:24</span> παιχνίδια στην πισίνα <br/> <span class="timestamp">06:36</span> στη θάλασσα <br/> <span class="timestamp">10:39</span> στο μπαρ του ξενοδοχείου <br/> <span class="timestamp">13:55</span> παιχνίδια στην πισίνα με δύο Σουηδάκια <br/> <span class="timestamp">17:18</span> Δημήτρης, Άννα στην παραλία <br/> <span class="timestamp">18:06</span> με άλλα παιδιά</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2001D
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1PKTE9i2I_55ie-f5RKczKD5c9tIOvIZa/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Ταξίδι στη Βόρεια Ιταλία με οικογένεια Λουκάρη και ξαδέλφες του Νίκου</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2002A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1QNF9vbIfzk3JSEUel9Zhx03h92wUTGIH/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Ο Ρεξ σε δράση... <br/> <span class="timestamp">00:58</span> Καθαρά Δευτέρα, Εγλυκάδα, με οικογένεια Αναστασόπουλου <br/> <span class="timestamp">14:33</span> Άννα, μαμά στο πιάνο <br/> <span class="timestamp">18:07</span> Δημήτρης, Άννα στη θάλασσα</div>
+</div>
+</div>
+<div class="group-title">2002B - 2004B</div>
+<div class="video-grid">
+<div class="video-item">
+<div class="video-title">k2002B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1C_laaxWwrfZxjgNdmXLcN_pGh9omUnc8/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:07</span> Αράχωβα (Έλατος). Πάσχα, στο σπίτι που νοίκιαζαν η Βιολέτα και ο Γιάννης <br/> <span class="timestamp">08:24</span> Κολυμβητήριο Πάτρας, επιδείξεις συγχρονισμένης κολύμβησης <br/> <span class="timestamp">13:39</span> Με τον Δημήτρη και την Άννα στον Άγνωστο Στρατιώτη, στον Εθνικό Κήπο και στο Ζάππειο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2002C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1hkUZehILg97-NhMpgFBHpBCFyVzS6YdT/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:00</span> Έτος (2002C) <br/> <span class="timestamp">00:07</span> Άννα, συγχρονισμένη, ΟΑΚΑ (30.3.2002)  <br/> <span class="timestamp">04:59</span> Δημοτικό Σχολείο Ρίου, γυμναστικές επιδείξεις</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2002D
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/15tyCKsFHpMnqRc495qDekaQF2sRWuqCD/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:07</span> Κεφαλονιά με οικογένεια Λουκάρη, Σπήλαιο Μελισσάνης  <br/> <span class="timestamp">02:27</span> Θάλασσα, Μύρτος <br/> <span class="timestamp">08:52</span> Διάφορα <br/> <span class="timestamp">09:17</span> Αράχωβα (Έλατος), σπίτι που νοίκιαζε η Βιολέτα κι ο Γιάννης και βόλτα στην πόλη <br/> <span class="timestamp">11:27</span> Δελφοί <br/> <span class="timestamp">17:15</span> Συγχρονισμένη κολύμβηση, Κολυμβητήριο Πάτρας</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2003A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1u4UFzdRT5SPFWs1cBKZvr-qpIBVQlKND/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Καραόκε, στο δωμάτιο της Άννας, με την Ελεονώρα... <br/> <span class="timestamp">07:29</span> Γενέθλια Αναστασίας Δογάνη. Με την κάμερα η μητέρα της <br/> <span class="timestamp">10:02</span> Με την Αναστασία στο σπίτι της, την επομένη των γενεθλίων της</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2003B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1E1LFhTu6p3E5h768v7lyvmea0mkUoXgy/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">49ο Δημοτικό σχολείο. Γιορτή τέλους χρονιάς: <span class="timestamp">00:06</span>  Άννα <br/> <span class="timestamp">12:45</span>  Δημήτρης</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2003C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1csNtAvv4b5vwx_O_q_YfA4XQV8B-25bq/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Άννα, Δημήτρης, Αναστασία παράσταση...</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2003D
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1283BHxY4QH_5Be9zSXxQSkI0EhfEfNH9/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Στην Πάρο, οι τέσσερεις...</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2003E
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1-eI9F-rFCdVl3Z1vi89CPixB5OPO_MGY/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Φλωρεντία, Τοσκάνη με αυτοκινούμενο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2004A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1dzBHqdRv6ErF2YNIfYk01anlgbreTl-D/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Ο Δημήτρης με την κάμερα στο δωμάτιο της Άννας με αυτήν και Γιώργο, Μαρία <br/> <span class="timestamp">07:16</span> Όταν η Άννα πήρε την κάμερα <br/> <span class="timestamp">16:26</span> Στα εγκαίνια της γέφυρας Ρίου-Αντιρρίου (11.8.2004) <br/> <span class="timestamp">18:47</span> Ολυμπιακή φλόγα και Δημήτρης, Άννα σε αγώνα <br/> <span class="timestamp">21:38</span> Δημήτρης, Γιώργος εκδρομή στη Ζάκυνθο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2004B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1HmOXbW2heUQG5ADxkcrLLpkHBs5wrtYR/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Δήμος Πάτρας - Δημοτικό Συμβούλιο με μαθητές από όλα τα Δημοτικά Σχολεία της πόλης <br/> <span class="timestamp">02:21</span> 49ο Δημοτικό - Γιορτή τέλους χρονιάς <br/> <span class="timestamp">05:57</span> Ταξίδι στο Λονδίνο με Νίκο, Σία, Παναγιώτη (α΄ μέρος)</div>
+</div>
+</div>
+<div class="group-title">2004C - 2008B</div>
+<div class="video-grid">
+<div class="video-item">
+<div class="video-title">k2004C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/14OV4AW1IgHDzSG_L5vhbh4osCsY36UPA/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Ταξίδι στο Λονδίνο με Νίκο, Σία, Παναγιώτη (β' μέρος)</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2005A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1OqVlGn0865Bwp-AqAe8Snl2NAU_zLdRE/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Αποκριάτικη γιορτή με Ωδεία της Πάτρας <br/> <span class="timestamp">05:11</span> Άννα... εκπομπή!!!</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2005B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/18kWGl2liubZkrobbZ69jqkC1_AWK1Wfg/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Δημήτρης με την κιθάρα και Άννα στην παρουσίαση εκπομπής <br/> <span class="timestamp">13:59</span> 49ο Δημοτικό σχολείο. Γιορτή τέλους χρονιάς</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2005C
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1xFX8uaUY-0-1yrVWo2SwQmQeBkAYUzbK/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Ταξίδι σε Ρόδο, Κω, Μύκονο με οικογένεια Λουκάρη</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2005D
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1TcHm0eRuytACYcFf6wGcUs5FKzG5Hw-x/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Γιώργος, Δημήτρης, Κο. Ταξίδι στην Ολλανδία με το αυτοκίνητο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2006A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1MN3-66Fq2ohgLceVmuv1lr-tQpekCoVr/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Ο Δημήτρης με την κάμερα περιηγείται στα δωμάτια του σπιτιού... <br/> <span class="timestamp">09:03</span> Πάσχα στο σπίτι</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2006B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1uayZtdOOqRs2LptRz0v3-ygNqIvTvOdw/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Τριγυρίζοντας στην Ευρώπη με Μάρω, Παναγιώτη, Αθηνά, Λάμπρο</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2007
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1Ekq_66VuRzeoJjCZ9MefHUFcwug78clL/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description"><span class="timestamp">00:06</span> Ταξίδι στην Ιθάκη <br/> <span class="timestamp">08:13</span> Δημήτρης με ηλεκτρική κιθάρα</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2008A
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1o9v2mqJVb50QR-MFF3gJfm9M_vfueyLU/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Ταξίδι σε Νορβηγία, Σουηδία με αυτοκινούμενα. Μαζί η Μάρω, ο Παναγιώτης, η Αθηνά και ο Λάμπρος <br/> μέρος Α</div>
+</div>
+<div class="video-item">
+<div class="video-title">k2008B
+          <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
+</div>
+<a class="video-button" href="https://drive.google.com/file/d/1KMQMDuWilrNdHD6I8njB7C9dw-aNI1cq/view?usp=sharing" target="_blank">Άνοιγμα</a>
+<div class="description">Ταξίδι σε Νορβηγία, Σουηδία με αυτοκινούμενα. Μαζί η Μάρω, ο Παναγιώτης, η Αθηνά και ο Λάμπρος <br/> μέρος Β</div>
+</div>
+</div>
+<script>
+  function toggleDesc(icon) {
+    const item = icon.closest('.video-item');
+    const desc = item.querySelector('.description');
+    const isVisible = desc.style.display === 'block';
+
+    // Close all descriptions
+    document.querySelectorAll('.description').forEach(d => {
+      d.style.display = 'none';
+    });
+
+    // Re-open only if it was previously hidden
+    if (!isVisible) {
+      desc.style.display = 'block';
+    }
+  }
+</script>
+<script>
+  function searchVideos() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+
+    document.querySelectorAll('.video-item').forEach(item => {
+      const title = item.querySelector('.video-title').innerText.toLowerCase();
+      const desc = item.querySelector('.description').innerText.toLowerCase();
+      item.style.display = title.includes(input) || desc.includes(input) ? '' : 'none';
+    });
+
+// Show button after scrolling
+	}
+	window.onscroll = function () {
+	document.querySelector(".back-to-top").style.display =
+    window.scrollY > 200 ? "block" : "none";
+	};
+	</script>
+<a class="back-to-top" href="#" title="Πίσω στην αρχή">Αρχή</a>
+<script>
+	const backToTopBtn = document.querySelector(".back-to-top");
+	window.addEventListener("scroll", function () {
+    if (window.scrollY > 200) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+	});
+ // Show button after scrolling
+	}
+	window.onscroll = function () {
+	document.querySelector(".back-to-top").style.display =
+    window.scrollY > 200 ? "block" : "none";
+	};
+	</script>
+<a class="back-to-top" href="#" title="Πίσω στην αρχή">Αρχή</a>
+<script>
+	const backToTopBtn = document.querySelector(".back-to-top");
+	window.addEventListener("scroll", function () {
+    if (window.scrollY > 200) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+	});
+	</script>
+</body>
+</html>
