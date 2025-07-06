@@ -11,26 +11,22 @@
       font-family: 'Calibri', sans-serif;
       padding-top: 0;
 	  margin-top: 0;
-	  margin-left: 30px;
-      background-color: #f4f4f4;
+	  margin-left: 25px;
+      background-color: #E3F5FF;
 	}
-	 h1 {
-		margin-top: 5px;
- 	}
 	.main-banner img {
 	  display: block;
 	  margin-top: 15px;
 	  padding: 10px;
-	  margin-left: 110px;
+	  margin-left: 90px;
 	 / max-width: 90%;
-	  
 	}
     .intro-button {
       position: absolute;
 	  size: 160;
-      top: 60px;
-      right: 110px;
-      background-color: #1C78FF;
+      top: 80px;
+      right: 75px;
+      background-color: #398FDA;  //1C78FF;
       color: white;
       padding: 10px 15px;
       border: none;
@@ -48,9 +44,9 @@
 	}
 	.search-bar {
 	  position: absolute;
-	  margin-left: 1630px;
-	  margin-right: 50px;
-	  margin-top: -40px;
+	  margin-left: 1800px;
+	  margin-right: 15px;
+	  margin-top: -5px;
 	}
     .search-bar input {
       padding: 10px;
@@ -59,55 +55,34 @@
       max-width: 115px;
       border: 1px solid #ccc;
       border-radius: 8px;
-     }
-    .group-title {
-	  font-family: 'VAGRounded BT', sans-serif;
-      font-size: 18px;
-      font-weight: bold;
-	  letter-spacing: 2px;
-      margin-top: 40px;
-      color: #8F8F8F;
-	}
-	.descr-hint {
-	   padding: 5px;
-	   font-size: 14px;
-       font-family: inherit;
-       font-weight: normal;
-       color: #0000FF;
-	   display: flex;
-	   align-items: center;
-	   margin-top: 5px;
-	}
-	.descr-hint img {
-		height: 26px;
-		vertical-align: middle;
-	}
-	.descr-hint:hover {
-		color: #000;
-	}
-	.right-box {
-	  position: absolute;
-	  margin-left: 512px;
-	  top: 170px; 
-	  width: 410px;
-	  padding: 0px;               
-	  font-size: 14px;
-	  font-family: inherit;
-	  font-style: italic;
-	/  font-weight: bold;
-	  letter-spacing: .5px;
-	  color: #0000C9;
-	  text-align: center;
-	  background-color: #FFF9F6;
-	  border: 1px solid #ccc;
-	  border-radius: 10px;
-		
 	}
     .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 10px;
+	  display: grid;
+	  grid-template-columns: repeat(5, 1fr);
+	  gap: 20px;
+	  margin-top: 10px;
+	}
+	@media (max-width: 1400px) {
+	  .video-grid {
+		grid-template-columns: repeat(4, 1fr);
+	  }
+	}
+	@media (max-width: 1000px) {
+	  .video-grid {
+		grid-template-columns: repeat(3, 1fr);
+	  }
+	}
+	@media (max-width: 700px) {
+	  .video-grid {
+		grid-template-columns: repeat(2, 1fr);
+	  }
+	}
+	@media (max-width: 450px) {
+	  .video-grid {
+		grid-template-columns: 1fr;
+	  }
+	}
+		  
 	} 
 	.video-item:nth-child(even) {
 		background-color: #FEF9F7;
@@ -126,7 +101,7 @@
 	  right: 150px;
 	  width: 50px; 
 	  height: 30px;
-	  background: url('NEO2_anigif_custombg.gif') no-repeat center;
+	  background: url('NEO2_anigif_white10.gif') no-repeat center;
 	  background-size: contain;
 	  pointer-events: none;	 
     }
@@ -137,7 +112,7 @@
     .video-title {
       font-family: 'VAGRounded BT', sans-serif;
 	  font-weight: bold;
-      font-size: 14px;
+      font-size: 15px;
 	  letter-spacing: 2px;
       margin-bottom: 10px;
 	  color: #1E34D3
@@ -161,12 +136,12 @@
       float: right;
       font-size: 16px;
       color: #1557FF;
-     }
+    }
     .description {
-	 display: none;
-	 margin-top: 10px;
-	 font-size: 14px;
-	 color: #333;
+	  display: none;
+	  margin-top: 10px;
+	  font-size: 14px;
+	  color: #333;
     }
 	.back-to-top {
 	  position: fixed;
@@ -184,7 +159,7 @@
 	  font-family: 'Calibri', sans-serif;
 	  font-size: 16px;
 	}
-	  .timestamp {
+	.timestamp {
       font-style: italic;
       color: #C37EF2;
     }
@@ -193,7 +168,62 @@
 	  src: url('TT0756M_.woff') format('woff');
 	  font-weight: normal;
 	  font-style: normal;
-	}
+}
+.group-title {
+  margin-top: 40px;
+  font-family: 'VAGRounded BT', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #8F8F8F;
+}
+
+/* FIRST .group-title specific spacing */
+.group-title:first-of-type {
+  margin-top: 10px;
+}
+
+/* .center-box spacing */
+.center-box {
+  display: block;
+  margin: 1px auto -40px auto; /* increased bottom margin */
+  height: 40px;
+  width: 640px;
+  font-size: 14px;
+  font-family: inherit;
+  font-style: italic;
+  font-weight: bold;
+  color: #0D4FD7;
+  background-color: #D1EDFF;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+/* DESCR-HINT fixed positioning */
+.descr-hint {
+  position: fixed;
+  top: 25px;
+  right: 65px;
+  padding: 5px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: normal;
+  color: #0000FF;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+.descr-hint img {
+  height: 26px;
+  vertical-align: middle;
+}
+.descr-hint:hover {
+  color: #000;
+}
+
 </style>
 </head>
 <body>
@@ -201,7 +231,6 @@
 <div class="main-banner">
 <img alt="KOKAKIA_VIDEO" src="SKHNES5-090.png"/>
 </div>
-
 <div class="top-bar">
 <a class="intro-button" href="https://drive.google.com/file/d/1cZiCk3YPHI0Wp8nmXt8dftBioDH1YeJc/view?usp=sharing" target="_blank">Εισαγωγικό Βίντεο</a>
 <div class="search-bar">
@@ -212,12 +241,9 @@
   <img src="descr_icon-1.png"info icon">
   σύντομη περιγραφή
 </div>
-
-<div class="right-box">
-  <p>Για παρακολούθηση κάθε βίντεο με καλύτερη ποιότητα εικόνας, <br/>
-επιλέξετε άλλον player, εκτός από αυτόν του Google Drive</p>
+<div class="center-box">
+  <p>Για παρακολούθηση κάθε βίντεο με καλύτερη ποιότητα εικόνας, επιλέξετε άλλον player μετά το 'Άνοιγμα'</p>
 </div>
-
 </div>
 <div class="group-title">1992 - 1997</div>
 <div class="video-grid">
@@ -226,14 +252,14 @@
           <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
 </div>
 <a class="video-button" href="https://drive.google.com/file/d/1YGgyHcoWcafnL3rC4D7nxne1AJfTHMz4/view?usp=sharing" target="_blank">Άνοιγμα</a>
-<div class="description">Δημήτρης 2 μηνών: <br/> <span class="timestamp">00:13</span> στο relax <br/> <span class="timestamp">02:19</span> με Μαρία αγκαλιά, τάισμα <br/> <span class="timestamp">04:21</span> με Μαρία στη βεράντα <br/> <span class="timestamp">07:11</span> με Μαρία στο κρεβάτι <br/> <span class="timestamp">10:18</span> με Γιώργο <br/> <span class="timestamp">13:50</span> με Βιολέτα στη βεράντα</div>
+<div class="description"><u>Δημήτρης 2 μηνών:</u> <br/> <span class="timestamp">00:13</span> στο relax <br/> <span class="timestamp">02:19</span> με Μαρία αγκαλιά, τάισμα <br/> <span class="timestamp">04:21</span> με Μαρία στη βεράντα <br/> <span class="timestamp">07:11</span> με Μαρία στο κρεβάτι <br/> <span class="timestamp">10:18</span> με Γιώργο <br/> <span class="timestamp">13:50</span> με Βιολέτα στη βεράντα</div>
 </div>
 <div class="video-item">
 <div class="video-title">k1993
           <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
 </div>
 <a class="video-button" href="https://drive.google.com/file/d/1PNvst6Xg5IRIBKs4W-nJu7hLCvbTk-Er/view?usp=sharing" target="_blank">Άνοιγμα</a>
-<div class="description"><span class="timestamp">00:15</span> Άννα 2,5 μηνών <br/> <span class="timestamp">01:09</span> Άννα 2,5 μηνών, με παππού και γιαγιά <br/>  Δημήτρης 15 μηνών: <br/> <span class="timestamp">06:16</span> με παππού, γιαγιά <br/> <span class="timestamp">07:44</span> μόνος του <br/> <span class="timestamp">09:58</span> με Μαρία, Γιώργο</div>
+<div class="description"><span class="timestamp">00:15</span> Άννα 2,5 μηνών <br/> <span class="timestamp">01:09</span> Άννα 2,5 μηνών, με παππού και γιαγιά <br/> <u>Δημήτρης 15 μηνών:</u> <br/> <span class="timestamp">06:16</span> με παππού, γιαγιά <br/> <span class="timestamp">07:44</span> μόνος του <br/> <span class="timestamp">09:58</span> με Μαρία, Γιώργο</div>
 </div>
 <div class="video-item">
 <div class="video-title">k1994A
@@ -261,7 +287,7 @@
           <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
 </div>
 <a class="video-button" href="https://drive.google.com/file/d/1fZrxRK1YREFBRJvSV4agZChGl3Da1kPj/view?usp=sharing" target="_blank">Άνοιγμα</a>
-<div class="description"><span class="timestamp">00:06</span> διάφορα στο σπίτι <br/> <span class="timestamp">01:03</span> Άννα στη βεράντα της κουζίνας <br/> Δημήτρης, Άννα: <br/> <span class="timestamp">01:56</span>  στην πίσω βεράντα <br/> <span class="timestamp">03:57</span>  με Ελεονώρα στο σπίτι <br/> <span class="timestamp">06:45</span> κατάβρεγμα... <br/> <span class="timestamp">07:38</span>  βόλτα με το αυτοκίνητο <br/> <span class="timestamp">09:08</span>  με Ελεονώρα στην παραλία <br/> <span class="timestamp">10:40</span>  με Μαρία, Γιώργο στη θάλασσα <br/> <span class="timestamp">13:51</span>  με Μαρία, Άντα, Βιολέτα στην παραλία <br/> <span class="timestamp">15:49</span>  παιχνίδι στο μπάνιο</div>
+<div class="description"><span class="timestamp">00:06</span> διάφορα στο σπίτι της Κούλας <br/> <span class="timestamp">01:03</span> Άννα στη βεράντα της κουζίνας <br/> <u> Δημήτρης, Άννα: </u> <br/> <span class="timestamp">01:56</span>  στην πίσω βεράντα <br/> <span class="timestamp">03:57</span>  με Ελεονώρα στο σπίτι <br/> <span class="timestamp">06:45</span> κατάβρεγμα... <br/> <span class="timestamp">07:38</span>  βόλτα με το αυτοκίνητο <br/> <span class="timestamp">09:08</span>  με Ελεονώρα στην παραλία <br/> <span class="timestamp">10:40</span>  με Μαρία, Γιώργο στη θάλασσα <br/> <span class="timestamp">13:51</span>  με Μαρία, Άντα, Βιολέτα στην παραλία <br/> <span class="timestamp">15:49</span>  παιχνίδι στο μπάνιο</div>
 </div>
 <div class="video-item">
 <div class="video-title">k1995C
@@ -313,7 +339,7 @@
           <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
 </div>
 <a class="video-button" href="https://drive.google.com/file/d/157BLAT1wc5VvR-K029lwqccJ42eG_MEP/view?usp=sharing" target="_blank">Άνοιγμα</a>
-<div class="description"><span class="timestamp">00:07</span> Γενέθλια στον παιδικό σταθμό ΝΑΥΤΙΛΟ <br/>   Κέρκυρα, με Τάκη, Νατάσσα και Γιάννη: <br/> <span class="timestamp">04:17</span> στο πλοίο <br/> <span class="timestamp">05:25</span> Αχίλλειο <br/> <span class="timestamp">06:32</span> Στο σπίτι που μέναμε <br/> <span class="timestamp">07:02</span> Μπάνιο και παιχνίδια στη θάλασσα <br/> <span class="timestamp">11:15</span> Άννα κοιτάζοντας τη θάλασσα <br/> <span class="timestamp">11:53</span> Βόλτα στην πόλη με άμαξα  <br/> <span class="timestamp">15:27</span> Χριστουγεννιάτικη γιορτή στον παιδικό σταθμό ΝΑΥΤΙΛΟ</div>
+<div class="description"><span class="timestamp">00:07</span> Γενέθλια στον παιδικό σταθμό ΝΑΥΤΙΛΟ <br/><u>Κέρκυρα, με Τάκη, Νατάσσα και Γιάννη: </u><br/> <span class="timestamp">04:17</span> στο πλοίο <br/> <span class="timestamp">05:25</span> Αχίλλειο <br/> <span class="timestamp">06:32</span> Στο σπίτι που μέναμε <br/> <span class="timestamp">07:02</span> Μπάνιο και παιχνίδια στη θάλασσα <br/> <span class="timestamp">11:15</span> Άννα κοιτάζοντας τη θάλασσα <br/> <span class="timestamp">11:53</span> Βόλτα στην πόλη με άμαξα  <br/> &nbsp;<span class="timestamp">15:27</span> Χριστουγεννιάτικη γιορτή στον παιδικό σταθμό ΝΑΥΤΙΛΟ</div>
 </div>
 <div class="video-item">
 <div class="video-title">k2000A
@@ -494,7 +520,7 @@
           <span class="info-icon" onclick="toggleDesc(this)">ⓘ</span>
 </div>
 <a class="video-button" href="https://drive.google.com/file/d/1Ekq_66VuRzeoJjCZ9MefHUFcwug78clL/view?usp=sharing" target="_blank">Άνοιγμα</a>
-<div class="description"><span class="timestamp">00:06</span> Ταξίδι στην Ιθάκη <br/> <span class="timestamp">08:13</span> Δημήτρης με ηλεκτρική κιθάρα</div>
+<div class="description"><span class="timestamp">00:06</span> Εκδρομή στην Ιθάκη <br/> <span class="timestamp">08:13</span> Δημήτρης με ηλεκτρική κιθάρα</div>
 </div>
 <div class="video-item">
 <div class="video-title">k2008A
