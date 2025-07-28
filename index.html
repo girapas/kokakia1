@@ -58,7 +58,7 @@
     font-family: 'Calibri', sans-serif;
     font-size: 14px;
     max-width: 110px;
-    border: 1px solid #F2FFFF;
+    border: 3px solid #F6E571;      // #F2FFFF;
     border-radius: 8px;
  }	
   .main-banner {
@@ -78,6 +78,7 @@
     right: 50px;
     padding: 5px;
     font-size: 14px;
+	font-weight: bold;
     color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -90,7 +91,7 @@
   }
 
   .descr-hint:hover {
-    color: #000;
+    color: #363636;
   }
 
   .center-box {
@@ -164,7 +165,7 @@
   }
 
   .video-item:nth-child(even) {
-	background-color: #FFFAF8;
+	background-color: #DDDDDD; // #D9D5D3;
   }
 
   .video-title {
@@ -188,14 +189,14 @@
     margin-top: 5px;
   }
 
-   .video-button:hover {
+  .video-button:hover {
      background-color: #1A48B2;
   }	
 	
-	.video-item.new::after {
+  .video-item.new::after {
 	  content: "";
 	  position: absolute;
-	  top: 12px;
+      top: 12px;
 	  right: 12px;
 	  width: 50px;
 	  height: 30px;
@@ -204,8 +205,13 @@
 	  pointer-events: none;
 	}
 	
-  }
 
+ .video-item.new:nth-child(even)::after {
+    background: url('NEO2_anigif_grey10.gif') no-repeat center;
+    background-size: contain;
+}
+	
+  }
   .info-icon {
     cursor: pointer;
     float: right;
@@ -216,8 +222,10 @@
   .description {
     display: none;
     margin-top: 10px;
-    font-size: 14px;
-    color: #333;
+	//font-family: 'Roboto', sans-serif;
+    //font-weight: bold;
+	font-size: 14px;
+    color: #000000;
   }
 
   .back-to-top {
